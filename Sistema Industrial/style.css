@@ -1,0 +1,668 @@
+/* ==========================================================================
+   RESET E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f9; 
+    color: #333333; 
+    height: 100vh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ==========================================================================
+   TELA DE LOGIN
+   ========================================================================== */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f4f6f9;
+    padding: 20px; /* Evita que o card cole nas bordas em celulares */
+}
+
+.login-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 35px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: #1e293b;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.login-header p {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #1e293b;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+}
+
+.btn-login {
+    width: 100%;
+    padding: 13px;
+    background-color: #0284c7;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #0369a1;
+}
+
+.error-msg {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   BARRA LATERAL (SIDEBAR)
+   ========================================================================== */
+.sidebar {
+    width: 260px;
+    background-color: #1e293b; 
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 25px 20px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+    letter-spacing: 1px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 25px 0;
+    flex-grow: 1;
+}
+
+.sidebar-menu li a {
+    display: block;
+    padding: 14px 25px;
+    color: #cbd5e1; 
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar-menu li a:hover {
+    background-color: #0f172a; 
+    color: #ffffff;
+    padding-left: 30px; 
+}
+
+.sidebar-menu li a.active {
+    background-color: #0284c7; 
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #334155;
+}
+
+.btn-logout {
+    width: 100%;
+    padding: 10px;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #dc2626;
+}
+
+/* ==========================================================================
+   ÁREA DE CONTEÚDO PRINCIPAL E CARDS
+   ========================================================================== */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.top-navbar {
+    background-color: #ffffff;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+
+.user-profile {
+    font-size: 0.85rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.page-body {
+    padding: 25px;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 25px;
+}
+
+/* ==========================================================================
+   FORMULÁRIO DE CADASTRO DE ITEM (ESTILO EM LINHA)
+   ========================================================================== */
+.form-item-card h2 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.inline-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 140px;
+}
+
+.input-box label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.input-box input, .input-box select {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+    color: #333;
+}
+
+.input-box input:focus, .input-box select:focus {
+    border-color: #0284c7;
+}
+
+.flex-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-add {
+    padding: 11px 20px;
+    background-color: #10b981; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.btn-add:hover {
+    background-color: #059669;
+}
+
+.btn-cancel {
+    padding: 11px 20px;
+    background-color: #64748b; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #475569;
+}
+
+/* ==========================================================================
+   TABELA DE INVENTÁRIO E AÇÕES
+   ========================================================================== */
+.table-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 15px;
+}
+
+.table-header-actions h1 {
+    font-size: 1.3rem;
+    color: #1e293b;
+    margin-bottom: 0;
+}
+
+.btn-export {
+    background-color: #1e293b; 
+    color: #ffffff;
+    border: 1px solid #334155;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-export:hover {
+    background-color: #0f172a;
+    border-color: #0f172a;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.inventory-table th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 14px 16px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.inventory-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+}
+
+.inventory-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-action {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-edit:hover {
+    background-color: #e0f2fe; 
+}
+
+.btn-delete:hover {
+    background-color: #fee2e2; 
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO DO DASHBOARD (CARDS SUPERIORES)
+   ========================================================================== */
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.dash-card {
+    background-color: #ffffff;
+    flex: 1;
+    min-width: 220px;
+    padding: 20px 25px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.dash-card h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b; 
+    margin-bottom: 10px;
+}
+
+.dash-card p {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b; 
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.dash-card span {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.card-alert h3 {
+    color: #991b1b; 
+}
+.card-alert p {
+    color: #ef4444; 
+}
+
+/* ==========================================================================
+   ESTILOS ADICIONAIS PARA O GRÁFICO DA ABA DASHBOARD
+   ========================================================================== */
+.chart-card h2 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 20px;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320px; 
+}
+
+/* ==========================================================================
+   CSS SEÇÃO DE REGISTRO DE MOVIMENTAÇÕES (ENTRADA / SAÍDA)
+   ========================================================================== */
+.movimentacoes-layout {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    flex-wrap: wrap; 
+}
+
+.form-mov-card {
+    flex: 1;
+    min-width: 320px;
+    max-width: 450px;
+}
+
+.table-mov-card {
+    flex: 2;
+    min-width: 450px;
+}
+
+.form-mov-card h2 {
+    font-size: 1.15rem;
+    color: #1e293b;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.input-box-block {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.input-box-block label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 6px;
+}
+
+.input-box-block input, .input-box-block select {
+    padding: 11px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+    color: #333;
+}
+
+.input-box-block input:focus, .input-box-block select:focus {
+    border-color: #0284c7;
+}
+
+.btn-mov-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+.btn-mov-submit:hover {
+    background-color: #0f172a;
+}
+
+.table-mov-card h1 {
+    font-size: 1.15rem;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.badge-success { background-color: #d1fae5; color: #065f46; } 
+.badge-warning { background-color: #fef3c7; color: #92400e; } 
+.badge-danger  { background-color: #fee2e2; color: #991b1b; }
+
+
+/* ==========================================================================
+   ⚠️ NOVA SEÇÃO: REGRAS DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* 1. Ajustes para Tablets e Notebooks Pequenos (Abaixo de 992px) */
+@media (max-width: 992px) {
+    .movimentacoes-layout {
+        flex-direction: column; /* Empilha o formulário e a tabela de auditoria */
+    }
+    .form-mov-card, .table-mov-card {
+        max-width: 100%;
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* 2. Ajustes para Celulares e Telas Pequenas (Abaixo de 768px) */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* Permite rolar a página inteira se o conteúdo passar do limite */
+    }
+
+    .app-container {
+        flex-direction: column; /* A barra lateral vai para o topo e o conteúdo fica embaixo */
+        height: auto;
+    }
+
+    /* Transforma a Barra Lateral em uma barra superior compacta */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-bottom: 2px solid #334155;
+    }
+
+    .sidebar-header {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    /* Organiza o menu horizontalmente em celulares */
+    .sidebar-menu {
+        display: flex;
+        padding: 0;
+        justify-content: space-around;
+        border-bottom: 1px solid #334155;
+    }
+
+    .sidebar-menu li {
+        flex: 1;
+        text-align: center;
+    }
+
+    .sidebar-menu li a {
+        padding: 12px 5px;
+        font-size: 0.8rem;
+    }
+
+    .sidebar-menu li a:hover {
+        padding-left: 5px; /* Desativa o efeito de empurrar o texto para o lado */
+    }
+
+    .sidebar-footer {
+        padding: 10px 15px;
+    }
+
+    /* Top navbar sutil */
+    .top-navbar {
+        padding: 0 15px;
+        height: 50px;
+    }
+
+    .page-body {
+        padding: 15px; /* Diminui o recuo das bordas para aproveitar a tela do celular */
+    }
+
+    /* Empilha os campos do formulário em linha para que caibam na tela */
+    .inline-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-box {
+        width: 100%;
+    }
+
+    .dashboard-container {
+        gap: 15px;
+    }
+
+    .dash-card {
+        min-width: 100%; /* Cada indicador do dashboard ocupa uma linha cheia */
+    }
+
+    .chart-wrapper {
+        height: 260px; /* Reduz ligeiramente o gráfico para caber na tela do celular */
+    }
+
+    .table-header-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .btn-export {
+        text-align: center;
+        justify-content: center;
+    }
+}

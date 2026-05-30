@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGE Industrial - Controle de Estoque</title>
+    <link class="css-style" rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div id="login-screen" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>SGE INDUSTRIAL</h2>
+                <p>Painel de Autenticação</p>
+            </div>
+            <form id="login-form" onsubmit="autenticar(event)">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" placeholder="Ex: admin ou usuario01" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+                <div id="error-message" class="error-msg" style="display: none;">❌ Usuário ou senha incorretos.</div>
+                <button type="submit" class="btn-login">Acessar Sistema</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-panel" class="app-container hidden">
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-header">
+                    SGE INDUSTRIAL
+                </div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" id="link-dashboard" class="active" onclick="alternarAba('dashboard')">📊 Dashboard</a></li>
+                    <li><a href="#" id="link-estoque" onclick="alternarAba('estoque')">📦 Saldo em Estoque</a></li>
+                    <li><a href="#" id="link-movimentacoes" onclick="alternarAba('movimentacoes')">🔄 Registrar Movimentação</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <button onclick="fazerLogout()" class="btn-logout">🚪 Sair do Sistema</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-navbar">
+                <div class="user-profile">
+                    Usuário: <strong id="nav-user-name">---</strong> (<span id="nav-user-role">---</span>)
+                </div>
+            </header>
+
+            <div class="page-body">
+                
+                <section id="aba-dashboard">
+                    <div class="dashboard-container">
+                        <div class="dash-card">
+                            <h3>📋 Total de Itens</h3>
+                            <p id="dash-total-itens">0</p>
+                            <span>Modelos registrados</span>
+                        </div>
+                        <div class="dash-card">
+                            <h3>📦 Volume Total</h3>
+                            <p id="dash-volume-total">0</p>
+                            <span>Unidades físicas</span>
+                        </div>
+                        <div class="dash-card card-alert">
+                            <h3>⚠️ Alertas Críticos</h3>
+                            <p id="dash-alertas">0</p>
+                            <span>Abaixo do limite mínimo</span>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <h2>📊 Nível de Estoque por Produto</h2>
+                        <div class="chart-wrapper">
+                            <canvas id="graficoEstoque"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="aba-estoque" class="hidden">
+                    <div id="container-formulario-cadastro" class="card form-item-card">
+                        <h2 id="form-title">➕ Cadastrar Novo Item no Estoque</h2>
+                        <form id="product-form" onsubmit="salvarItem(event)" class="inline-form">
+                            <input type="hidden" id="edit-index" value="">
+
+                            <div class="input-box">
+                                <label for="item-codigo">Código</label>
+                                <input type="text" id="item-codigo" placeholder="Ex: MP-105" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="item-nome">Descrição do Item</label>
+                                <input type="text" id="item-nome" placeholder="Ex: Chapa de Aço" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="item-categoria">Categoria</label>
+                                <select id="item-categoria" required>
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="Matéria-Prima">Matéria-Prima</option>
+                                    <option value="Insumo">Insumo</option>
+                                    <option value="Produto Acabado">Produto Acabado</option>
+                                    <option value="Embalagem">Embalagem</option>
+                                </select>
+                            </div>
+                            <div class="input-box">
+                                <label for="item-qtd">Quantidade</label>
+                                <input type="number" id="item-qtd" min="0" placeholder="0" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="item-unidade">Unidade</label>
+                                <input type="text" id="item-unidade" placeholder="Ex: KG, UN" required>
+                            </div>
+                            <div class="btn-box flex-buttons">
+                                <button type="submit" id="btn-submit" class="btn-add">Adicionar</button>
+                                <button type="button" id="btn-cancel" class="btn-cancel hidden" onclick="cancelarEdicao()">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card table-card">
+                        <div class="table-header-actions">
+                            <h1>📦 Itens Cadastrados (Banco Local)</h1>
+                            <button onclick="exportarParaCSV()" class="btn-export">💾 Exportar CSV</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="inventory-table">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Descrição do Item</th>
+                                        <th>Categoria</th>
+                                        <th>Qtd Atual</th>
+                                        <th>Unidade</th>
+                                        <th>Status</th>
+                                        <th id="header-coluna-acoes" style="text-align: center;">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventory-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="aba-movimentacoes" class="hidden">
+                    <div class="movimentacoes-layout">
+                        <div class="card form-mov-card">
+                            <h2>🔄 Registrar Fluxo de Entrada / Saída</h2>
+                            <form id="movimentacao-form" onsubmit="processarMovimentacao(event)">
+                                <div class="input-box-block">
+                                    <label for="mov-produto">Selecionar Produto do Estoque</label>
+                                    <select id="mov-produto" required></select>
+                                </div>
+                                <div class="input-box-block">
+                                    <label for="mov-tipo">Tipo de Operação</label>
+                                    <select id="mov-tipo" required>
+                                        <option value="ENTRADA">📥 Entrada (Aumento de Saldo)</option>
+                                        <option value="SAIDA">📤 Saída (Baixa / Expedição)</option>
+                                    </select>
+                                </div>
+                                <div class="input-box-block">
+                                    <label for="mov-qtd">Quantidade da Operação</label>
+                                    <input type="number" id="mov-qtd" min="1" placeholder="Digite a quantidade" required>
+                                </div>
+                                <button type="submit" class="btn-mov-submit">Confirmar Lançamento</button>
+                            </form>
+                        </div>
+
+                        <div class="card table-mov-card">
+                            <h1>📋 Histórico de Auditoria (Fluxo Geral)</h1>
+                            <div class="table-responsive">
+                                <table class="inventory-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Data / Hora</th>
+                                            <th>Código</th>
+                                            <th>Produto</th>
+                                            <th>Operação</th>
+                                            <th>Qtd Movimentada</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="movimentacoes-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
