@@ -40,6 +40,8 @@ Para homologação das regras de nível de acesso na interface, utilize as segui
 ---
 
 ## 📂 Estrutura do Projeto
+
+```text
 ├── index.html     # Estrutura semântica e seções do app (SPA)
 ├── style.css      # Estilização corporativa e regras de visibilidade
 └── script.js      # Core da aplicação (Lógica de estado, CRUD e Gráficos)
