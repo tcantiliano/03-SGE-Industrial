@@ -1,6 +1,6 @@
 # SGE Industrial - Sistema de Gestão de Estoque 📊📦
 
-O **SGE Industrial** é uma aplicação web do tipo **SPA (Single Page Application)** desenvolvida com JavaScript Vanilla (puro), projetada para simular o controle de inventário e fluxo de materiais dentro de um ambiente fabril. 
+O **SGE Industrial** é uma aplicação web do tipo **SPA (Single Page Application)** desenvolvida com JavaScript Vanilla (puro), projetada para simular o controle de inventário e fluxo de materiais dentro de um ambiente fabrica. 
 
 O projeto foi estruturado com foco em boas práticas de engenharia de software, separação de responsabilidades (HTML/CSS/JS modulares) e gerenciamento de estado consistente para demonstrar competência técnica em desenvolvimento front-end.
 
